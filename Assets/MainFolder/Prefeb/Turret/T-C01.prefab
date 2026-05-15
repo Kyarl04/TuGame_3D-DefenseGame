@@ -426,6 +426,7 @@ MonoBehaviour:
   range: 15
   bulletPrefab: {fileID: 6686401370490609367, guid: 191c5dbead252a946b1044555781f04e, type: 3}
   fireRate: 1
+  bulletDamage: 10
   useLaser: 0
   damageOverTime: 30
   slowAmount: 0.5

@@ -104,7 +104,14 @@ public class Turret : MonoBehaviour {
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        partToRotate.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+        // X축은 -90도로 눕혀서 고정하고, Y축과 Z축 중 회전하는 축에 값을 넣습니다.
+        
+        // 만약 Z축을 기준으로 팽이처럼 돈다면:
+        partToRotate.rotation = Quaternion.Euler(-90f, 0f, rotation.y);
+        
+        // 만약 Y축을 기준으로 팽이처럼 돈다면 (이걸 먼저 시도해 보세요!):
+        // partToRotate.rotation = Quaternion.Euler(-90f, rotation.y, 0f);
     }
 
     void Laser ()

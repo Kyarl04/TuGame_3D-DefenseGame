@@ -14,14 +14,22 @@ public class BuildManager : MonoBehaviour {
     public GameObject buildEffect;
     public GameObject sellEffect;
     
-    [Header("Merge Settings")]
-    public GameObject mergeReadyEffectPrefab; // 붉게 빛나는 파티클 (Looping 설정 필수)
-    public TurretBlueprint[] randomTurrets; // 뽑기 상점에 있는 타워 종류들
+    [Header("Merge Settings (Tier 1~4 Effects)")]
+    [Tooltip("1단계~4단계별로 합성이 가능할 때 띄울 파티클 (Size를 4로 하세요)")]
+    public GameObject[] mergeReadyEffects = new GameObject[4]; 
+    
+    [Header("Tower Setting")]
+    [Tooltip("사용할 유일한 타워 블루프린트")]
+    public TurretBlueprint baseTower; // 종류를 1개로 줄였으므로 배열이 아닌 단일 변수 사용
 
-    // 랜덤 소환 (Create 버튼과 연결)
+    [Header("Gacha Probabilities")]
+    [Tooltip("1단계~5단계 스폰 확률 (총합 100)")]
+    public float[] tierProbabilities = new float[5] { 70f, 20f, 6f, 3f, 1f }; 
+
+    // 랜덤 소환
     public void BuildRandomTurretOn(Node node)
     {
-        if (PlayerStats.Money < 100) // 소환 비용 (필요에 따라 수정)
+        if (PlayerStats.Money < 100)
         {
             Debug.Log("돈이 부족합니다!");
             return;
@@ -29,28 +37,37 @@ public class BuildManager : MonoBehaviour {
 
         PlayerStats.Money -= 100;
 
-        int randomIndex = Random.Range(0, randomTurrets.Length);
-        TurretBlueprint blueprint = randomTurrets[randomIndex];
+        // 타워 등급(1~5단계) 확률 기반 선택
+        int spawnedTier = 1;
+        float randomVal = Random.Range(0f, 100f);
+        float cumulativeProb = 0f;
 
-        // 1단계(인덱스 0) 타워 소환 (Z축 0도 회전 적용)
-        GameObject turret = Instantiate(blueprint.prefabs[0], node.GetBuildPosition(), Quaternion.identity);
+        for (int i = 0; i < tierProbabilities.Length; i++)
+        {
+            cumulativeProb += tierProbabilities[i];
+            if (randomVal <= cumulativeProb)
+            {
+                spawnedTier = i + 1; 
+                break;
+            }
+        }
+
+        // 결정된 등급의 모델 소환 (배열 인덱스는 0부터이므로 spawnedTier - 1)
+        GameObject turret = Instantiate(baseTower.prefabs[spawnedTier - 1], node.GetBuildPosition(), Quaternion.identity);
         
         node.turret = turret;
-        node.turretBlueprint = blueprint;
-        node.towerTier = 1; // 1단계로 세팅
+        node.turretBlueprint = baseTower;
+        node.towerTier = spawnedTier; 
 
-        // 건설 이펙트
         if (buildEffect != null)
         {
             GameObject effect = Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
             Destroy(effect, 5f);
         }
 
-        // 새 타워가 생겼으니 조합 가능한지 전체 맵 검사
         UpdateMergeEffects(); 
     }
 
-    // 동일한 종류, 동일한 등급의 타워 리스트를 반환
     public List<Node> GetIdenticalNodes(TurretBlueprint blueprint, int tier)
     {
         List<Node> result = new List<Node>();
@@ -66,13 +83,10 @@ public class BuildManager : MonoBehaviour {
         return result;
     }
 
-    // 조합(Merge) 실행 로직
     public void ExecuteMerge(Node targetNode, List<Node> identicalNodes)
     {
-        // 1. 클릭한 '살아남을 타워'는 파괴 명단에서 제외
         identicalNodes.Remove(targetNode);
 
-        // 2. 남은 타워들 중 랜덤하게 2개를 골라 제물로 바침(파괴)
         Node sacrifice1 = identicalNodes[Random.Range(0, identicalNodes.Count)];
         identicalNodes.Remove(sacrifice1);
         
@@ -82,35 +96,35 @@ public class BuildManager : MonoBehaviour {
         sacrifice1.DestroyTurretForMerge();
         sacrifice2.DestroyTurretForMerge();
 
-        // 3. 클릭했던 타워를 다음 단계로 진화
         targetNode.UpgradeToNextTier();
-
-        // 4. 합성이 끝났으니 맵 전체의 붉은빛 이펙트 상태 갱신
         UpdateMergeEffects();
     }
 
-    // 3개 이상 모인 타워에만 이펙트를 켜주는 함수
     public void UpdateMergeEffects()
     {
         Node[] allNodes = FindObjectsOfType<Node>();
         
-        // 우선 맵에 있는 모든 이펙트를 끕니다. (초기화)
+        // 일단 모든 이펙트를 끔
         foreach (Node n in allNodes)
         {
-            n.SetMergeEffect(false);
+            n.SetMergeEffect(false, null);
         }
 
-        // 다시 검사하여 3개 이상인 그룹에만 이펙트를 켭니다.
+        // 다시 검사
         foreach (Node n in allNodes)
         {
-            if (n.turret == null || n.towerTier >= 5) continue; // 최고 레벨이거나 빈칸은 무시
+            // 빈칸이거나 5단계(최고레벨)면 무시하고 넘어갑니다!
+            if (n.turret == null || n.towerTier >= 5) continue; 
 
             List<Node> identicals = GetIdenticalNodes(n.turretBlueprint, n.towerTier);
             if (identicals.Count >= 3)
             {
+                // 타워 단계에 맞는 이펙트 할당 (1단계는 index 0, 4단계는 index 3)
+                GameObject effectToPlay = mergeReadyEffects[n.towerTier - 1]; 
+                
                 foreach (Node idNode in identicals)
                 {
-                    idNode.SetMergeEffect(true);
+                    idNode.SetMergeEffect(true, effectToPlay);
                 }
             }
         }
