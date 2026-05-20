@@ -61,16 +61,24 @@ public class Node : MonoBehaviour {
 
     public void UpgradeToNextTier()
     {
+        int currentTierIndex = towerTier - 1;
+
         Destroy(turret); 
         towerTier++;     
 
         GameObject _turret = Instantiate(turretBlueprint.prefabs[towerTier - 1], GetBuildPosition(), Quaternion.identity);
         turret = _turret;
 
-        if (buildManager.buildEffect != null)
+        if (buildManager.upgradeEffects != null && currentTierIndex < buildManager.upgradeEffects.Length)
         {
-            GameObject effect = Instantiate(buildManager.buildEffect, GetBuildPosition(), Quaternion.identity);
-            Destroy(effect, 5f);
+            GameObject effectPrefab = buildManager.upgradeEffects[currentTierIndex];
+            
+            if (effectPrefab != null)
+            {
+                // [수정] Quaternion.identity 대신 effectPrefab.transform.rotation 을 넣습니다.
+                GameObject effect = Instantiate(effectPrefab, GetBuildPosition(), effectPrefab.transform.rotation);
+                Destroy(effect, 5f); 
+            }
         }
     }
 

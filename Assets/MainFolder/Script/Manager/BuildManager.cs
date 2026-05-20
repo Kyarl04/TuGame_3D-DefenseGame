@@ -17,6 +17,10 @@ public class BuildManager : MonoBehaviour {
     [Header("Merge Settings (Tier 1~4 Effects)")]
     [Tooltip("1단계~4단계별로 합성이 가능할 때 띄울 파티클 (Size를 4로 하세요)")]
     public GameObject[] mergeReadyEffects = new GameObject[4]; 
+
+    [Header("Merge Settings (Upgrade Effects)")]
+    [Tooltip("진화하는 순간 펑! 터질 파티클 (1->2, 2->3, 3->4, 4->5)")]
+    public GameObject[] upgradeEffects = new GameObject[4];
     
     [Header("Tower Setting")]
     [Tooltip("사용할 유일한 타워 블루프린트")]
