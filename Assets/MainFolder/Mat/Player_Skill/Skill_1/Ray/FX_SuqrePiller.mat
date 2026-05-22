@@ -7,13 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_Cylinder
+  m_Name: FX_SuqrePiller
   m_Shader: {fileID: 4800000, guid: d3ee410b950b50549bdcfd6432163109, type: 3}
   m_ValidKeywords:
   - _DINTENSITY_CUSTOM2_X_CUSTOM2_OFF
   - _DISSOLVE_CUSTOM2_X_CUSTOM2_OFF
   - _DISSOLVE_OFF
-  - _DISTORTION_SWITCH_ON
   - _MOPACITY_CUSTOM2_Y_CUSTOM2_OFF
   - _MTEX_RGB_TEX
   - _MUV_SCROLL_CUSTOM1_XY_CUSTOM1_OFF
@@ -41,15 +40,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionTex:
-        m_Texture: {fileID: 2800000, guid: a432dbc2432c1504f9f1072d11796cea, type: 3}
-        m_Scale: {x: 1, y: 0.16}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 96a5c92ec9c60c24caa68bf39db4ca7a, type: 3}
-        m_Scale: {x: 1, y: 0.33}
+        m_Texture: {fileID: 2800000, guid: d4dcf32ebab442f44875524f2fa69022, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: d4f95834318e631408c6837fb2c980ab, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: c1bf89a27ef199e4db825533d924fe1c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VDTex:
@@ -77,14 +80,14 @@ Material:
     - DIntensity2: 0
     - D_RotateValue: 0
     - D_RotateValue4: 0
-    - M_RotateValue: 0
+    - M_RotateValue: 0.5
     - M_RotateValue2: 0
     - _AlphaCutoff: 0.5
     - _CullMode: 0
     - _DDirection_Width: 1
     - _DEdge_Intensity: 1
     - _DEdge_Width: 0.01
-    - _DIntensity: 0.28
+    - _DIntensity: 0
     - _DIntensity_Custom2_X: 0
     - _DirectionSmoothness: 0.3282696
     - _Dissolve: 0
@@ -92,7 +95,7 @@ Material:
     - _Dissolve_Custom2_X: 0
     - _Dissolve_Distort_Value: 0
     - _Distortion_Custom2_Z: 0
-    - _Distortion_Switch: 1
+    - _Distortion_Switch: 0
     - _Fresnel: 0
     - _Fresnel_Range: 0
     - _Length_Scale: 1
@@ -121,6 +124,7 @@ Material:
     - _Smoothness: 0.3
     - _SoftParticle: 1
     - _SoftParticle_Factor: 0
+    - _SoftParticle_ON: 0
     - _UVMaskDirection: 0
     - _VDIntensity: 0
     - _VertexDisplcement: 0
@@ -135,11 +139,12 @@ Material:
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Frenel_Color: {r: 1, g: 1, b: 1, a: 1}
     - _MColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MRefine: {r: 1, g: 1, b: 2.77, a: 0}
-    - _MUV_Scroll: {r: 0, g: -0.64, b: 0, a: 0}
+    - _MRefine: {r: 2, g: 4, b: 2.24, a: 0}
+    - _MUV_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _PolarOffset: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Polar_CenterUV: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _RGB_Offset: {r: 0.03, g: 0, b: -0.03, a: 0}
+    - _Refine: {r: 2, g: 1.87, b: 2.68, a: 0}
     - _VDScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _VetexDir: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
