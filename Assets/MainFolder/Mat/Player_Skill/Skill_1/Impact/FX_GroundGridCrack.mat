@@ -7,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_ImpactCube
+  m_Name: FX_GroundGridCrack
   m_Shader: {fileID: 4800000, guid: d3ee410b950b50549bdcfd6432163109, type: 3}
   m_ValidKeywords:
-  - _DINTENSITY_CUSTOM2_X_CUSTOM2_OFF
+  - _DINTENSITY_CUSTOM2_X_CUSTOM2_X_ON
   - _DISSOLVE_CUSTOM2_X_CUSTOM2_OFF
-  - _DISSOLVE_OFF
+  - _DISSOLVE_SMOOTHNESS
   - _MOPACITY_CUSTOM2_Y_CUSTOM2_OFF
   - _MTEX_RGB_TEX
   - _MUV_SCROLL_CUSTOM1_XY_CUSTOM1_OFF
@@ -25,7 +25,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2999
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3e1abdc307d33be4b9749b9dab244f23, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistortionTex:
@@ -44,15 +44,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4a341af32198854439211b2c407324ff, type: 3}
-        m_Scale: {x: 0.7, y: 1}
+        m_Texture: {fileID: 2800000, guid: 1f50c17c151558740b03e45e5d1ba100, type: 3}
+        m_Scale: {x: 3, y: 3}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 4a341af32198854439211b2c407324ff, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0e7d527b836983447a4af00c81052f11, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: e8506bf5982d48a49b4b855df18870f7, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VDTex:
@@ -80,7 +80,7 @@ Material:
     - DIntensity2: 0
     - D_RotateValue: 0
     - D_RotateValue4: 0
-    - M_RotateValue: 0.25
+    - M_RotateValue: 0
     - M_RotateValue2: 0
     - _AlphaCutoff: 0.5
     - _CullMode: 0
@@ -88,9 +88,9 @@ Material:
     - _DEdge_Intensity: 1
     - _DEdge_Width: 0.01
     - _DIntensity: 0
-    - _DIntensity_Custom2_X: 0
+    - _DIntensity_Custom2_X: 1
     - _DirectionSmoothness: 0.3282696
-    - _Dissolve: 0
+    - _Dissolve: 1
     - _DissolveFloat: 0.4526118
     - _Dissolve_Custom2_X: 0
     - _Dissolve_Distort_Value: 0
@@ -99,7 +99,7 @@ Material:
     - _Fresnel: 0
     - _Fresnel_Range: 0
     - _Length_Scale: 1
-    - _MColor_Intensity: 1
+    - _MColor_Intensity: 40
     - _MOpacity_Custom2_Y: 0
     - _MTex_ImageClampU: 0
     - _MTex_ImageClampV: 0
@@ -111,17 +111,17 @@ Material:
     - _MainTex_RGB: 0
     - _MaskOpacity: 1
     - _Mask_Distort_Value: 0
-    - _Mask_Intensity: 2.53
+    - _Mask_Intensity: 1
     - _Mask_Power: 1
-    - _QueueControl: 0
+    - _QueueControl: 1
     - _QueueOffset: 0
-    - _RGB_Value: 0.2
+    - _RGB_Value: 0
     - _Radial_Scale: 1
     - _Rim_OneMinus: 0
     - _Screen_ADD: 0
     - _Screen_Distortion: 0
     - _Screen_Intensity: 0
-    - _Smoothness: 0.3
+    - _Smoothness: 0.189
     - _SoftParticle: 1
     - _SoftParticle_Factor: 0
     - _SoftParticle_ON: 0
@@ -140,11 +140,11 @@ Material:
     - _Frenel_Color: {r: 1, g: 1, b: 1, a: 1}
     - _MColor: {r: 1, g: 1, b: 1, a: 1}
     - _MRefine: {r: 1, g: 1, b: 1, a: 0}
-    - _MUV_Scroll: {r: 0, g: -0.48, b: 0, a: 0}
+    - _MUV_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _PolarOffset: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Polar_CenterUV: {r: 0.5, g: 0.5, b: 0, a: 0}
-    - _RGB_Offset: {r: 0.03, g: 0, b: -0.03, a: 0}
-    - _Refine: {r: 1, g: 1, b: 2.54, a: 0}
+    - _RGB_Offset: {r: 0.03, g: -0.03, b: 0.03, a: -0.03}
+    - _Refine: {r: 1, g: 1, b: 1.49, a: 0}
     - _VDScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _VetexDir: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []

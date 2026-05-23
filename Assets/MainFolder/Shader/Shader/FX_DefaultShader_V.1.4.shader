@@ -423,12 +423,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_10_0_g87 = ( ( v.vertex.xyz + float3( uv_VDTex ,  0.0 ) ).xy + appendResult8_g87 );
 				float2 uv_DistortionTex = v.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_5 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_5;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_5;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2Dlod( _DistortionTex, float4( temp_output_10_0_g96, 0, 0.0) );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
@@ -631,12 +631,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_330_0 = rotator1_g98;
 				float2 uv_DistortionTex = IN.ase_texcoord3.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_2 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_2 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_2;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_2 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_2;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2D( _DistortionTex, temp_output_10_0_g96 );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 texCoord528 = IN.ase_texcoord5;
@@ -677,10 +677,10 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 uv_MaskTex = IN.ase_texcoord3.xy * _MaskTex_ST.xy + _MaskTex_ST.zw;
 				float4 Distortion351 = temp_output_477_0;
 				float2 temp_cast_12 = (0.5).xx;
-				float cos1_g84 = cos( ( M_RotateValue2 * TWO_PI ) );
-				float sin1_g84 = sin( ( M_RotateValue2 * TWO_PI ) );
-				float2 rotator1_g84 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_12 , float2x2( cos1_g84 , -sin1_g84 , sin1_g84 , cos1_g84 )) + temp_cast_12;
-				float2 temp_output_332_0 = rotator1_g84;
+				float cos1_g102 = cos( ( M_RotateValue2 * TWO_PI ) );
+				float sin1_g102 = sin( ( M_RotateValue2 * TWO_PI ) );
+				float2 rotator1_g102 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_12 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_12;
+				float2 temp_output_332_0 = rotator1_g102;
 				float2 break7_g63 = MUV_Scroll2;
 				float2 appendResult8_g63 = (float2(( break7_g63.x * _TimeParameters.x ) , ( break7_g63.y * _TimeParameters.x )));
 				float2 temp_output_10_0_g63 = ( temp_output_332_0 + appendResult8_g63 );
@@ -1018,12 +1018,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_10_0_g87 = ( ( v.vertex.xyz + float3( uv_VDTex ,  0.0 ) ).xy + appendResult8_g87 );
 				float2 uv_DistortionTex = v.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_5 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_5;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_5;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2Dlod( _DistortionTex, float4( temp_output_10_0_g96, 0, 0.0) );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
@@ -1192,20 +1192,20 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 uv_MaskTex = IN.ase_texcoord2.xy * _MaskTex_ST.xy + _MaskTex_ST.zw;
 				float2 uv_DistortionTex = IN.ase_texcoord2.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_1 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_1;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_1;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2D( _DistortionTex, temp_output_10_0_g96 );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
 				float2 temp_cast_3 = (0.5).xx;
-				float cos1_g84 = cos( ( M_RotateValue2 * TWO_PI ) );
-				float sin1_g84 = sin( ( M_RotateValue2 * TWO_PI ) );
-				float2 rotator1_g84 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g84 , -sin1_g84 , sin1_g84 , cos1_g84 )) + temp_cast_3;
-				float2 temp_output_332_0 = rotator1_g84;
+				float cos1_g102 = cos( ( M_RotateValue2 * TWO_PI ) );
+				float sin1_g102 = sin( ( M_RotateValue2 * TWO_PI ) );
+				float2 rotator1_g102 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_3;
+				float2 temp_output_332_0 = rotator1_g102;
 				float2 break7_g63 = MUV_Scroll2;
 				float2 appendResult8_g63 = (float2(( break7_g63.x * _TimeParameters.x ) , ( break7_g63.y * _TimeParameters.x )));
 				float2 temp_output_10_0_g63 = ( temp_output_332_0 + appendResult8_g63 );
@@ -1553,12 +1553,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_10_0_g87 = ( ( v.vertex.xyz + float3( uv_VDTex ,  0.0 ) ).xy + appendResult8_g87 );
 				float2 uv_DistortionTex = v.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_5 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_5;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_5;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2Dlod( _DistortionTex, float4( temp_output_10_0_g96, 0, 0.0) );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
@@ -1701,20 +1701,20 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 uv_MaskTex = IN.ase_texcoord.xy * _MaskTex_ST.xy + _MaskTex_ST.zw;
 				float2 uv_DistortionTex = IN.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_1 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_1;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_1;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2D( _DistortionTex, temp_output_10_0_g96 );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
 				float2 temp_cast_3 = (0.5).xx;
-				float cos1_g84 = cos( ( M_RotateValue2 * TWO_PI ) );
-				float sin1_g84 = sin( ( M_RotateValue2 * TWO_PI ) );
-				float2 rotator1_g84 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g84 , -sin1_g84 , sin1_g84 , cos1_g84 )) + temp_cast_3;
-				float2 temp_output_332_0 = rotator1_g84;
+				float cos1_g102 = cos( ( M_RotateValue2 * TWO_PI ) );
+				float sin1_g102 = sin( ( M_RotateValue2 * TWO_PI ) );
+				float2 rotator1_g102 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_3;
+				float2 temp_output_332_0 = rotator1_g102;
 				float2 break7_g63 = MUV_Scroll2;
 				float2 appendResult8_g63 = (float2(( break7_g63.x * _TimeParameters.x ) , ( break7_g63.y * _TimeParameters.x )));
 				float2 temp_output_10_0_g63 = ( temp_output_332_0 + appendResult8_g63 );
@@ -2062,12 +2062,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_10_0_g87 = ( ( v.vertex.xyz + float3( uv_VDTex ,  0.0 ) ).xy + appendResult8_g87 );
 				float2 uv_DistortionTex = v.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_5 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_5;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_5;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2Dlod( _DistortionTex, float4( temp_output_10_0_g96, 0, 0.0) );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
@@ -2205,20 +2205,20 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 uv_MaskTex = IN.ase_texcoord.xy * _MaskTex_ST.xy + _MaskTex_ST.zw;
 				float2 uv_DistortionTex = IN.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_1 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_1;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_1;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2D( _DistortionTex, temp_output_10_0_g96 );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
 				float2 temp_cast_3 = (0.5).xx;
-				float cos1_g84 = cos( ( M_RotateValue2 * TWO_PI ) );
-				float sin1_g84 = sin( ( M_RotateValue2 * TWO_PI ) );
-				float2 rotator1_g84 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g84 , -sin1_g84 , sin1_g84 , cos1_g84 )) + temp_cast_3;
-				float2 temp_output_332_0 = rotator1_g84;
+				float cos1_g102 = cos( ( M_RotateValue2 * TWO_PI ) );
+				float sin1_g102 = sin( ( M_RotateValue2 * TWO_PI ) );
+				float2 rotator1_g102 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_3;
+				float2 temp_output_332_0 = rotator1_g102;
 				float2 break7_g63 = MUV_Scroll2;
 				float2 appendResult8_g63 = (float2(( break7_g63.x * _TimeParameters.x ) , ( break7_g63.y * _TimeParameters.x )));
 				float2 temp_output_10_0_g63 = ( temp_output_332_0 + appendResult8_g63 );
@@ -2573,12 +2573,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_10_0_g87 = ( ( v.vertex.xyz + float3( uv_VDTex ,  0.0 ) ).xy + appendResult8_g87 );
 				float2 uv_DistortionTex = v.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_5 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_5;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_5;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2Dlod( _DistortionTex, float4( temp_output_10_0_g96, 0, 0.0) );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
@@ -2723,20 +2723,20 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 uv_MaskTex = IN.ase_texcoord1.xy * _MaskTex_ST.xy + _MaskTex_ST.zw;
 				float2 uv_DistortionTex = IN.ase_texcoord1.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_1 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_1;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_1;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2D( _DistortionTex, temp_output_10_0_g96 );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
 				float2 temp_cast_3 = (0.5).xx;
-				float cos1_g84 = cos( ( M_RotateValue2 * TWO_PI ) );
-				float sin1_g84 = sin( ( M_RotateValue2 * TWO_PI ) );
-				float2 rotator1_g84 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g84 , -sin1_g84 , sin1_g84 , cos1_g84 )) + temp_cast_3;
-				float2 temp_output_332_0 = rotator1_g84;
+				float cos1_g102 = cos( ( M_RotateValue2 * TWO_PI ) );
+				float sin1_g102 = sin( ( M_RotateValue2 * TWO_PI ) );
+				float2 rotator1_g102 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_3;
+				float2 temp_output_332_0 = rotator1_g102;
 				float2 break7_g63 = MUV_Scroll2;
 				float2 appendResult8_g63 = (float2(( break7_g63.x * _TimeParameters.x ) , ( break7_g63.y * _TimeParameters.x )));
 				float2 temp_output_10_0_g63 = ( temp_output_332_0 + appendResult8_g63 );
@@ -3091,12 +3091,12 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 temp_output_10_0_g87 = ( ( v.vertex.xyz + float3( uv_VDTex ,  0.0 ) ).xy + appendResult8_g87 );
 				float2 uv_DistortionTex = v.ase_texcoord.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_5 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_5;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_5 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_5;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2Dlod( _DistortionTex, float4( temp_output_10_0_g96, 0, 0.0) );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
@@ -3241,20 +3241,20 @@ Shader "FX_DefaultShader_V.1.4"
 				float2 uv_MaskTex = IN.ase_texcoord1.xy * _MaskTex_ST.xy + _MaskTex_ST.zw;
 				float2 uv_DistortionTex = IN.ase_texcoord1.xy * _DistortionTex_ST.xy + _DistortionTex_ST.zw;
 				float2 temp_cast_1 = (0.5).xx;
-				float cos1_g102 = cos( ( D_RotateValue4 * TWO_PI ) );
-				float sin1_g102 = sin( ( D_RotateValue4 * TWO_PI ) );
-				float2 rotator1_g102 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_1;
+				float cos1_g103 = cos( ( D_RotateValue4 * TWO_PI ) );
+				float sin1_g103 = sin( ( D_RotateValue4 * TWO_PI ) );
+				float2 rotator1_g103 = mul( uv_DistortionTex - temp_cast_1 , float2x2( cos1_g103 , -sin1_g103 , sin1_g103 , cos1_g103 )) + temp_cast_1;
 				float2 break7_g96 = _DUV_Scroll;
 				float2 appendResult8_g96 = (float2(( break7_g96.x * _TimeParameters.x ) , ( break7_g96.y * _TimeParameters.x )));
-				float2 temp_output_10_0_g96 = ( rotator1_g102 + appendResult8_g96 );
+				float2 temp_output_10_0_g96 = ( rotator1_g103 + appendResult8_g96 );
 				float4 tex2DNode101 = tex2D( _DistortionTex, temp_output_10_0_g96 );
 				float4 temp_output_477_0 = ( tex2DNode101 * tex2DNode101.a );
 				float4 Distortion351 = temp_output_477_0;
 				float2 temp_cast_3 = (0.5).xx;
-				float cos1_g84 = cos( ( M_RotateValue2 * TWO_PI ) );
-				float sin1_g84 = sin( ( M_RotateValue2 * TWO_PI ) );
-				float2 rotator1_g84 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g84 , -sin1_g84 , sin1_g84 , cos1_g84 )) + temp_cast_3;
-				float2 temp_output_332_0 = rotator1_g84;
+				float cos1_g102 = cos( ( M_RotateValue2 * TWO_PI ) );
+				float sin1_g102 = sin( ( M_RotateValue2 * TWO_PI ) );
+				float2 rotator1_g102 = mul( ( float4( uv_MaskTex, 0.0 , 0.0 ) + ( Distortion351 * _Mask_Distort_Value ) ).rg - temp_cast_3 , float2x2( cos1_g102 , -sin1_g102 , sin1_g102 , cos1_g102 )) + temp_cast_3;
+				float2 temp_output_332_0 = rotator1_g102;
 				float2 break7_g63 = MUV_Scroll2;
 				float2 appendResult8_g63 = (float2(( break7_g63.x * _TimeParameters.x ) , ( break7_g63.y * _TimeParameters.x )));
 				float2 temp_output_10_0_g63 = ( temp_output_332_0 + appendResult8_g63 );
@@ -3604,8 +3604,6 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;455;1249.726,-602.5434;Inherit;Fal
 Node;AmplifyShaderEditor.LerpOp;454;1432.725,-756.6854;Inherit;False;3;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;2;FLOAT4;0,0,0,0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.ToggleSwitchNode;459;1615.433,-641.8167;Inherit;False;Property;_Screen_ADD;Screen_ADD;67;0;Create;True;0;0;0;False;0;False;0;True;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.StaticSwitch;461;1844.228,-626.5664;Inherit;False;Property;_Screen_Distortion;Screen_Distortion;65;0;Create;True;0;0;0;False;1;Header(ScreenDistortion);False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;FLOAT4;0,0,0,0;False;0;FLOAT4;0,0,0,0;False;2;FLOAT4;0,0,0,0;False;3;FLOAT4;0,0,0,0;False;4;FLOAT4;0,0,0,0;False;5;FLOAT4;0,0,0,0;False;6;FLOAT4;0,0,0,0;False;7;FLOAT4;0,0,0,0;False;8;FLOAT4;0,0,0,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.SimpleMultiplyOpNode;21;-562.5107,-411.012;Inherit;False;3;3;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;2;COLOR;0,0,0,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.RangedFloatNode;428;-780.6484,-381.2948;Inherit;False;Constant;_Float11;Float 11;52;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;86;-7772.962,-274.4411;Inherit;False;1;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.Vector2Node;87;-7769.63,-449.6829;Inherit;False;Property;_MUV_Scroll;M.UV_Scroll;4;0;Create;True;0;0;0;False;0;False;0,0;0,0;0;3;FLOAT2;0;FLOAT;1;FLOAT;2
 Node;AmplifyShaderEditor.TextureCoordinatesNode;92;-7824.923,-608.3751;Inherit;False;0;10;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -3656,7 +3654,6 @@ Node;AmplifyShaderEditor.RangedFloatNode;339;688.2777,2351.236;Inherit;False;Pro
 Node;AmplifyShaderEditor.StaticSwitch;485;-1351.102,-319.7749;Inherit;False;Property;_MTex_RGB1;M.Tex_RGB;12;0;Create;True;0;0;0;False;0;False;0;0;0;True;;KeywordEnum;2;Tex;RGB_Tex;Reference;323;True;True;All;9;1;COLOR;0,0,0,0;False;0;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;3;COLOR;0,0,0,0;False;4;COLOR;0,0,0,0;False;5;COLOR;0,0,0,0;False;6;COLOR;0,0,0,0;False;7;COLOR;0,0,0,0;False;8;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.GetLocalVarNode;180;260.4598,1828.958;Inherit;False;178;Mask;1;0;OBJECT;;False;1;COLOR;0
 Node;AmplifyShaderEditor.RegisterLocalVarNode;488;-2829.868,723.1904;Inherit;False;AddMask;-1;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.SamplerNode;486;-3223.896,684.5066;Inherit;True;Property;_AddMask;Add Mask;36;1;[SingleLineTexture];Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;DepthOnly;0;3;DepthOnly;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;True;False;False;False;False;0;False;;False;False;False;False;False;False;False;False;False;True;1;False;;False;False;True;1;LightMode=DepthOnly;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraphUnlitGUI;0;13;New Amplify Shader;2992e84f91cbeb14eab234972e07ea9d;True;Meta;0;4;Meta;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;False;False;False;True;4;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;UniversalMaterialType=Unlit;True;3;True;12;all;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;;0;0;Standard;0;False;0
@@ -3687,11 +3684,14 @@ Node;AmplifyShaderEditor.TextureCoordinatesNode;244;-6445.027,2380.345;Inherit;F
 Node;AmplifyShaderEditor.TextureCoordinatesNode;528;-5709.255,-938.4504;Inherit;False;3;-1;4;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.StaticSwitch;529;-5142.473,-942.7966;Inherit;False;Property;_Distortion_Custom2_Z;Distortion_Custom2_Z;25;0;Create;True;0;0;0;False;0;False;0;0;0;True;;Toggle;2;Key0;Key1;Create;True;True;All;9;1;FLOAT;0;False;0;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;4;FLOAT;0;False;5;FLOAT;0;False;6;FLOAT;0;False;7;FLOAT;0;False;8;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;59;-4989.151,341.7921;Inherit;False;Property;M_RotateValue2;M_RotateValue;30;0;Create;False;0;0;0;False;0;False;0;0.5;0;1;0;1;FLOAT;0
-Node;AmplifyShaderEditor.FunctionNode;332;-4696.402,263.7875;Inherit;False;FX_Rotator;0;;84;5b5f1b7a40b0c5a4aa99189029455ca7;0;2;7;FLOAT2;0,0;False;8;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.FunctionNode;531;-5984.125,-1198.678;Inherit;False;FX_Rotator;0;;102;5b5f1b7a40b0c5a4aa99189029455ca7;0;2;7;FLOAT2;0,0;False;8;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.FunctionNode;332;-4696.402,263.7875;Inherit;False;FX_Rotator;0;;102;5b5f1b7a40b0c5a4aa99189029455ca7;0;2;7;FLOAT2;0,0;False;8;FLOAT;0;False;1;FLOAT2;0
+Node;AmplifyShaderEditor.FunctionNode;531;-5984.125,-1198.678;Inherit;False;FX_Rotator;0;;103;5b5f1b7a40b0c5a4aa99189029455ca7;0;2;7;FLOAT2;0,0;False;8;FLOAT;0;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;99;-6230.246,-1317.74;Inherit;False;0;101;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;477;-5014.691,-1093.396;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.RangedFloatNode;530;-6274.96,-1109.839;Inherit;False;Property;D_RotateValue4;RotateValue;23;0;Create;False;0;0;0;False;0;False;0;0.5;0;1;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SamplerNode;486;-3223.896,684.5066;Inherit;True;Property;_AddMask;Add Mask;36;1;[SingleLineTexture];Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;21;-562.5107,-411.012;Inherit;False;3;3;0;FLOAT4;0,0,0,0;False;1;FLOAT;0;False;2;COLOR;0,0,0,0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;428;-780.6484,-381.2948;Inherit;False;Constant;_Float11;Float 11;52;0;Create;True;0;0;0;False;0;False;1;0;0;0;0;1;FLOAT;0
 WireConnection;121;9;332;0
 WireConnection;121;18;124;0
 WireConnection;120;1;52;0
@@ -3878,9 +3878,6 @@ WireConnection;459;0;454;0
 WireConnection;459;1;455;0
 WireConnection;461;1;427;0
 WireConnection;461;0;459;0
-WireConnection;21;0;323;0
-WireConnection;21;1;428;0
-WireConnection;21;2;148;0
 WireConnection;82;1;84;0
 WireConnection;82;0;83;0
 WireConnection;84;9;92;0
@@ -3961,5 +3958,8 @@ WireConnection;531;7;99;0
 WireConnection;531;8;530;0
 WireConnection;477;0;101;0
 WireConnection;477;1;101;4
+WireConnection;21;0;323;0
+WireConnection;21;1;428;0
+WireConnection;21;2;148;0
 ASEEND*/
-//CHKSM=CEFF755BF4E9D98642446CAE4A148245FB19C640
+//CHKSM=FE81BA569919ABAA1655674BA798012C19BB6FA7

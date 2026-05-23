@@ -433,7 +433,7 @@ Shader "FX_CubeGlow"
 				float3 BakedAlbedo = 0;
 				float3 BakedEmission = 0;
 				float3 Color = ( ( ( tex2DNode79 * tex2DNode79.a ) * _Color0 ) + ( saturate( ( break61.x + break61.y ) ) * _Color * _Color.a ) ).rgb;
-				float Alpha = ( ( tex2DNode79.b * _Color0.a ) * staticSwitch91 );
+				float Alpha = ( ( tex2DNode79.a * _Color0.a ) * staticSwitch91 );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -701,7 +701,7 @@ Shader "FX_CubeGlow"
 				#endif
 				
 
-				float Alpha = ( ( tex2DNode79.b * _Color0.a ) * staticSwitch91 );
+				float Alpha = ( ( tex2DNode79.a * _Color0.a ) * staticSwitch91 );
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -939,7 +939,7 @@ Shader "FX_CubeGlow"
 				#endif
 				
 
-				surfaceDescription.Alpha = ( ( tex2DNode79.b * _Color0.a ) * staticSwitch91 );
+				surfaceDescription.Alpha = ( ( tex2DNode79.a * _Color0.a ) * staticSwitch91 );
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1172,7 +1172,7 @@ Shader "FX_CubeGlow"
 				#endif
 				
 
-				surfaceDescription.Alpha = ( ( tex2DNode79.b * _Color0.a ) * staticSwitch91 );
+				surfaceDescription.Alpha = ( ( tex2DNode79.a * _Color0.a ) * staticSwitch91 );
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1419,7 +1419,7 @@ Shader "FX_CubeGlow"
 				#endif
 				
 
-				surfaceDescription.Alpha = ( ( tex2DNode79.b * _Color0.a ) * staticSwitch91 );
+				surfaceDescription.Alpha = ( ( tex2DNode79.a * _Color0.a ) * staticSwitch91 );
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1666,7 +1666,7 @@ Shader "FX_CubeGlow"
 				#endif
 				
 
-				surfaceDescription.Alpha = ( ( tex2DNode79.b * _Color0.a ) * staticSwitch91 );
+				surfaceDescription.Alpha = ( ( tex2DNode79.a * _Color0.a ) * staticSwitch91 );
 				surfaceDescription.AlphaClipThreshold = 0.5;
 
 				#if _ALPHATEST_ON
@@ -1762,7 +1762,7 @@ WireConnection;84;9;82;0
 WireConnection;84;1;85;0
 WireConnection;80;0;81;0
 WireConnection;80;1;78;0
-WireConnection;88;0;79;3
+WireConnection;88;0;79;4
 WireConnection;88;1;78;4
 WireConnection;89;2;90;0
 WireConnection;92;0;88;0
@@ -1770,4 +1770,4 @@ WireConnection;92;1;91;0
 WireConnection;91;1;93;0
 WireConnection;91;0;89;0
 ASEEND*/
-//CHKSM=BEBE6E5359F2510C84D94838B571B696F830625D
+//CHKSM=15AD91687909616E6341071610A24BA2EAFE2AF1

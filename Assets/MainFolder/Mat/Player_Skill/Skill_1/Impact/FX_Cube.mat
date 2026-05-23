@@ -7,15 +7,24 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FX_Squre_EdgeLine
-  m_Shader: {fileID: 4800000, guid: 832ca1d64e0181f4bab669ad5ea904c9, type: 3}
+  m_Name: FX_Cube
+  m_Shader: {fileID: 4800000, guid: d3ee410b950b50549bdcfd6432163109, type: 3}
   m_ValidKeywords:
-  - _SOFTPARTICLE_ON_ON
+  - _DINTENSITY_CUSTOM2_X_CUSTOM2_OFF
+  - _DISSOLVE_CUSTOM2_X_CUSTOM2_OFF
+  - _DISSOLVE_OFF
+  - _MOPACITY_CUSTOM2_Y_CUSTOM2_OFF
+  - _MTEX_RGB_TEX
+  - _MUV_SCROLL_CUSTOM1_XY_CUSTOM1_OFF
+  - _MUV_SCROLL_CUSTOM1_ZW_CUSTOM1_OFF
+  - _SOFTPARTICLE_OFF
+  - _UVMASKDIRECTION_U_POS
+  - _VERTEXDISPLCEMENT_OFF
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2999
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -34,19 +43,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTexture:
-        m_Texture: {fileID: 2800000, guid: 92861a4f2cd79b548a45f0095ad7cba9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2414b4bb2fa88b14ca49011d957f0bc9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TextureSample0:
-        m_Texture: {fileID: 2800000, guid: 92861a4f2cd79b548a45f0095ad7cba9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VDTex:
@@ -92,7 +93,6 @@ Material:
     - _Distortion_Switch: 0
     - _Fresnel: 0
     - _Fresnel_Range: 0
-    - _Keyword0: 0
     - _Length_Scale: 1
     - _MColor_Intensity: 1
     - _MOpacity_Custom2_Y: 0
@@ -108,7 +108,7 @@ Material:
     - _Mask_Distort_Value: 0
     - _Mask_Intensity: 1
     - _Mask_Power: 1
-    - _QueueControl: 1
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _RGB_Value: 0.2
     - _Radial_Scale: 1
@@ -119,31 +119,25 @@ Material:
     - _Smoothness: 0.3
     - _SoftParticle: 1
     - _SoftParticle_Factor: 0
-    - _SoftParticle_ON: 1
     - _UVMaskDirection: 0
     - _VDIntensity: 0
     - _VertexDisplcement: 0
     - _Vertex_Distort_Value: 0
-    - _Width: 0.2
     - _ZWirteMode: 0
     - _src: 5
     m_Colors:
     - DUV_Scroll2: {r: 0, g: 0, b: 0, a: 0}
     - MUV_Scroll2: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color0: {r: 8, g: 8, b: 8, a: 1}
     - _DEdge_Color: {r: 1, g: 1, b: 1, a: 1}
     - _DUV_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Frenel_Color: {r: 1, g: 1, b: 1, a: 1}
     - _MColor: {r: 1, g: 1, b: 1, a: 1}
-    - _MRefine: {r: 1, g: 1, b: 1, a: 0}
+    - _MRefine: {r: 3, g: 1, b: 4, a: 0}
     - _MUV_Scroll: {r: 0, g: 0, b: 0, a: 0}
     - _PolarOffset: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _Polar_CenterUV: {r: 0.5, g: 0.5, b: 0, a: 0}
     - _RGB_Offset: {r: 0.03, g: 0, b: -0.03, a: 0}
-    - _Refine: {r: 1, g: 1, b: 4, a: 0}
-    - _UV_Scroll_XY: {r: 0, g: 0, b: 0, a: 0}
     - _VDScrollSpeed: {r: 0, g: 0, b: 0, a: 0}
     - _VetexDir: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
