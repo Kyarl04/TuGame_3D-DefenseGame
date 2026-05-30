@@ -23,6 +23,10 @@ public class WaveSpawner : MonoBehaviour {
     private int waveIndex = 0;
     private bool isGameOver = false;
 
+    [Header("Effects")]
+    public GameObject spawnEffect;
+
+
     void Start()
     {
         EnemiesAlive = 0; 
@@ -84,6 +88,12 @@ public class WaveSpawner : MonoBehaviour {
 
     void SpawnEnemy (GameObject enemy, float hp)
     {
+        if (spawnEffect != null)
+        {
+            GameObject effect = Instantiate(spawnEffect, spawnPoint.position, spawnPoint.rotation);
+            Destroy(effect, 2f); // 2초 뒤에 파티클 찌꺼기 삭제
+        }
+        
         GameObject e = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
         
         Enemy enemyScript = e.GetComponent<Enemy>();
