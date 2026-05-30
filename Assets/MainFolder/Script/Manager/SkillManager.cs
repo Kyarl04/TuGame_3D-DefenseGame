@@ -4,19 +4,34 @@ using System.Collections;
 
 public class SkillManager : MonoBehaviour {
 
+    public static SkillManager instance;
+    public bool IsTargeting
+    {
+        get { return currentTargetingSkill != 0; }
+    }
+    void Awake()
+    {
+        if (instance != null) return;
+        instance = this;
+    }
+    
     [Header("Targeting System")]
-    public LayerMask groundMask; // 마우스가 닿을 바닥 레이어
-    public GameObject indicatorPrefab; // 마우스를 따라다닐 타격 범위 표시 UI(원형)
-    private GameObject activeIndicator;
-    private int currentTargetingSkill = 0; // 0: 없음, 1: 1번 스킬, 2: 2번 스킬
+    public LayerMask groundMask; 
+    private GameObject activeIndicator; // 현재 화면에 떠 있는 조준선
+    private int currentTargetingSkill = 0; 
 
     [Header("Skill 1 : Hellfire")]
     public Button skill1Button;
     public Image skill1CooldownImage;
     public float skill1Cooldown = 15f;
     public int skill1Damage = 500;
-    public float skill1Radius = 5f; // 1번 스킬 타격 범위 반경
-    public GameObject skill1EffectPrefab;
+    public float skill1Radius = 5f; 
+    
+    // [수정됨] 1번 스킬 전용 이펙트 분리
+    [Tooltip("1번 스킬 조준 시 마우스를 따라다닐 Ray/Decal 파티클")]
+    public GameObject skill1IndicatorPrefab; 
+    [Tooltip("1번 스킬 발동 시 쾅! 터질 타격 파티클")]
+    public GameObject skill1ImpactPrefab; 
     private bool isSkill1Ready = true;
 
     [Header("Skill 2 : Blizzard")]
@@ -24,13 +39,17 @@ public class SkillManager : MonoBehaviour {
     public Image skill2CooldownImage;
     public float skill2Cooldown = 20f;
     public int skill2Damage = 300;
-    public float skill2Radius = 8f; // 2번 스킬 타격 범위 반경
-    public GameObject skill2EffectPrefab;
+    public float skill2Radius = 8f; 
+    
+    // [수정됨] 2번 스킬 전용 이펙트 분리
+    [Tooltip("2번 스킬 조준 시 마우스를 따라다닐 Ray/Decal 파티클")]
+    public GameObject skill2IndicatorPrefab; 
+    [Tooltip("2번 스킬 발동 시 쾅! 터질 타격 파티클")]
+    public GameObject skill2ImpactPrefab; 
     private bool isSkill2Ready = true;
 
     void Update()
     {
-        // 1. 키보드 입력으로 타겟팅 모드 진입
         if (Input.GetKeyDown(KeyCode.Alpha1) && isSkill1Ready)
         {
             EnterTargetingMode(1);
@@ -40,7 +59,6 @@ public class SkillManager : MonoBehaviour {
             EnterTargetingMode(2);
         }
 
-        // 2. 타겟팅 모드 중일 때 마우스 조작 처리
         if (currentTargetingSkill != 0)
         {
             HandleTargeting();
@@ -51,36 +69,39 @@ public class SkillManager : MonoBehaviour {
     {
         currentTargetingSkill = skillIndex;
 
-        // 기존 인디케이터가 있다면 삭제
         if (activeIndicator != null) Destroy(activeIndicator);
 
-        // 새로운 인디케이터 생성
-        activeIndicator = Instantiate(indicatorPrefab);
-
-        // 스킬에 따라 인디케이터 크기 조절 (반경의 2배가 지름)
-        float radius = (skillIndex == 1) ? skill1Radius : skill2Radius;
-        activeIndicator.transform.localScale = new Vector3(radius * 2, 0.1f, radius * 2);
+        // 스킬 번호에 맞는 전용 조준선(Indicator) 생성
+        GameObject indicatorToSpawn = (skillIndex == 1) ? skill1IndicatorPrefab : skill2IndicatorPrefab;
+        
+        if (indicatorToSpawn != null)
+        {
+            activeIndicator = Instantiate(indicatorToSpawn);
+            
+            // 주의: 커스텀 파티클의 크기가 왜곡되지 않도록 코드에서 강제로 크기를 늘리지 않습니다.
+            // 인디케이터 프리팹 자체의 크기를 Radius에 맞게 유니티 에디터에서 조절해 주세요!
+        }
     }
 
     void HandleTargeting()
     {
-        // 카메라에서 마우스 위치로 레이저를 쏴서 바닥(Ground)을 찾음
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
         {
-            // 인디케이터를 마우스가 가리키는 바닥 위치로 이동
-            activeIndicator.transform.position = hit.point;
+            if (activeIndicator != null)
+            {
+                // 인디케이터가 지형에 파묻히지 않게 살짝(0.1f) 위로 띄워줍니다.
+                activeIndicator.transform.position = hit.point + new Vector3(0, 0.1f, 0);
+            }
 
-            // 좌클릭: 스킬 발동
             if (Input.GetMouseButtonDown(0))
             {
                 ExecuteSkill(hit.point);
             }
         }
 
-        // 우클릭: 타겟팅 취소
         if (Input.GetMouseButtonDown(1))
         {
             CancelTargeting();
@@ -91,9 +112,8 @@ public class SkillManager : MonoBehaviour {
     {
         float radius = (currentTargetingSkill == 1) ? skill1Radius : skill2Radius;
         int damage = (currentTargetingSkill == 1) ? skill1Damage : skill2Damage;
-        GameObject effectPrefab = (currentTargetingSkill == 1) ? skill1EffectPrefab : skill2EffectPrefab;
+        GameObject impactPrefab = (currentTargetingSkill == 1) ? skill1ImpactPrefab : skill2ImpactPrefab;
 
-        // 1. 범위 내의 모든 적 찾기 (OverlapSphere 사용)
         Collider[] colliders = Physics.OverlapSphere(targetPosition, radius);
         foreach (Collider collider in colliders)
         {
@@ -107,14 +127,13 @@ public class SkillManager : MonoBehaviour {
             }
         }
 
-        // 2. 파티클 이펙트 생성
-        if (effectPrefab != null)
+        // 실제 타격(Impact) 이펙트 생성
+        if (impactPrefab != null)
         {
-            GameObject effect = Instantiate(effectPrefab, targetPosition, Quaternion.identity);
+            GameObject effect = Instantiate(impactPrefab, targetPosition, Quaternion.identity);
             Destroy(effect, 3f);
         }
 
-        // 3. 쿨타임 시작 및 모드 초기화
         if (currentTargetingSkill == 1)
             StartCoroutine(CooldownRoutine(1, skill1Cooldown, skill1Button, skill1CooldownImage));
         else if (currentTargetingSkill == 2)
@@ -126,6 +145,8 @@ public class SkillManager : MonoBehaviour {
     void CancelTargeting()
     {
         currentTargetingSkill = 0;
+        
+        // 조준이 끝나거나 취소되면 인디케이터 삭제
         if (activeIndicator != null)
         {
             Destroy(activeIndicator);
@@ -134,31 +155,28 @@ public class SkillManager : MonoBehaviour {
 
     IEnumerator CooldownRoutine(int skillIndex, float cooldown, Button btn, Image cooldownImg)
     {
-        // 쿨타임 시작 세팅
         if (skillIndex == 1) isSkill1Ready = false;
         else isSkill2Ready = false;
         
-        btn.interactable = false;
-        cooldownImg.fillAmount = 1f;
+        // [추가된 안전장치] 버튼과 이미지가 연결되어 있을 때만 접근합니다!
+        if (btn != null) btn.interactable = false;
+        if (cooldownImg != null) cooldownImg.fillAmount = 1f;
 
-        // 시간 감소 연출
         float timer = cooldown;
         while (timer > 0)
         {
             timer -= Time.deltaTime;
-            cooldownImg.fillAmount = timer / cooldown;
+            if (cooldownImg != null) cooldownImg.fillAmount = timer / cooldown;
             yield return null;
         }
 
-        // 쿨타임 종료 세팅
         if (skillIndex == 1) isSkill1Ready = true;
         else isSkill2Ready = true;
 
-        btn.interactable = true;
-        cooldownImg.fillAmount = 0f;
+        if (btn != null) btn.interactable = true;
+        if (cooldownImg != null) cooldownImg.fillAmount = 0f;
     }
 
-    // UI 버튼을 마우스로 클릭했을 때도 타겟팅 모드에 진입하도록 연결할 함수
     public void OnSkill1ButtonClicked()
     {
         if (isSkill1Ready && currentTargetingSkill == 0) EnterTargetingMode(1);

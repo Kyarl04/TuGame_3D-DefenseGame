@@ -11,11 +11,16 @@ public class Turret : MonoBehaviour {
 
     [Header("Use Bullets (default)")]
     public GameObject bulletPrefab;
-    public float fireRate = 1f;
-    private float fireCountdown = 0f;
     
-    // 티어별로 인스펙터에서 설정할 총알 공격력
-    public int bulletDamage = 50; 
+    // 업그레이드 적용 전 기본 스탯
+    public float baseFireRate = 1f;
+    public int baseBulletDamage = 50; 
+    
+    // 업그레이드가 적용된 최종 스탯
+    [HideInInspector] public float currentFireRate;
+    [HideInInspector] public int currentBulletDamage;
+    
+    private float fireCountdown = 0f;
 
     [Header("Use Laser")]
     public bool useLaser = false;
@@ -31,14 +36,32 @@ public class Turret : MonoBehaviour {
     public Transform partToRotate;
     public float turnSpeed = 10f;
 
-    // 다중 총구 배열
     public Transform[] firePoints; 
     private int firePointIndex = 0;
 
     void Start () {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        ApplyUpgrades(); // 시작할 때 업그레이드 수치 적용
     }
     
+    // ★ [추가] UpgradeManager에서 보너스를 가져와서 내 스탯을 강화하는 함수
+    public void ApplyUpgrades()
+    {
+        if (UpgradeManager.instance != null)
+        {
+            // 최종 공격력 = 기본 공격력 + (업그레이드 레벨 * 레벨당 증가량)
+            currentBulletDamage = baseBulletDamage + (UpgradeManager.instance.atkLevel * UpgradeManager.instance.bonusDamagePerLevel);
+            
+            // 최종 공속 = 기본 공속 + (업그레이드 레벨 * 레벨당 증가량)
+            currentFireRate = baseFireRate + (UpgradeManager.instance.spdLevel * UpgradeManager.instance.bonusSpeedPerLevel);
+        }
+        else
+        {
+            currentBulletDamage = baseBulletDamage;
+            currentFireRate = baseFireRate;
+        }
+    }
+
     void UpdateTarget ()
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
@@ -92,7 +115,8 @@ public class Turret : MonoBehaviour {
             if (fireCountdown <= 0f)
             {
                 Shoot();
-                fireCountdown = 1f / fireRate;
+                // [수정] currentFireRate 사용
+                fireCountdown = 1f / currentFireRate;
             }
 
             fireCountdown -= Time.deltaTime;
@@ -105,13 +129,7 @@ public class Turret : MonoBehaviour {
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
 
-        // X축은 -90도로 눕혀서 고정하고, Y축과 Z축 중 회전하는 축에 값을 넣습니다.
-        
-        // 만약 Z축을 기준으로 팽이처럼 돈다면:
         partToRotate.rotation = Quaternion.Euler(-90f, 0f, rotation.y);
-        
-        // 만약 Y축을 기준으로 팽이처럼 돈다면 (이걸 먼저 시도해 보세요!):
-        // partToRotate.rotation = Quaternion.Euler(-90f, rotation.y, 0f);
     }
 
     void Laser ()
@@ -150,8 +168,8 @@ public class Turret : MonoBehaviour {
         {
             bullet.Seek(target);
             
-            // 타워에 설정된 공격력을 총알에 덮어씌움!
-            bullet.damage = bulletDamage; 
+            // [수정] currentBulletDamage 사용
+            bullet.damage = currentBulletDamage; 
         }
 
         firePointIndex++;

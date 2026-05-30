@@ -35,6 +35,7 @@ public class Node : MonoBehaviour {
     void OnMouseDown ()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (SkillManager.instance != null && SkillManager.instance.IsTargeting) return;
 
         if (turret != null)
         {
@@ -117,6 +118,7 @@ public class Node : MonoBehaviour {
     void OnMouseEnter ()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
+        if (SkillManager.instance != null && SkillManager.instance.IsTargeting) return;
         if (rend.material.HasProperty("_BaseColor"))
             rend.material.SetColor("_BaseColor", hoverColor);
         else

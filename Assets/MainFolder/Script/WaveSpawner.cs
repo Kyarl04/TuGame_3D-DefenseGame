@@ -4,25 +4,45 @@ using UnityEngine.UI;
 using TMPro;
 
 public class WaveSpawner : MonoBehaviour {
-
+    
     public static int EnemiesAlive = 0;
     public Wave[] waves;
     public Transform spawnPoint;
     public float timeBetweenWaves = 5f;
     private float countdown = 2f;
 
-    public TMP_Text waveCountdownText; // 에디터에서 꼭 할당해야 함!
+    [Header("UI & Game Settings")]
+    public TMP_Text waveCountdownText; 
+    public TMP_Text currentWaveText;   
+    public TMP_Text enemyCountText;    
+    public Image enemyCountGauge;      
+    
+    public int maxEnemiesAllowed = 50; 
     public GameManager gameManager;
+    
     private int waveIndex = 0;
+    private bool isGameOver = false;
+
+    void Start()
+    {
+        EnemiesAlive = 0; 
+    }
 
     void Update ()
     {
-        // [수정] 랜타디는 몬스터가 살아있어도 다음 웨이브가 나와야 하므로 
-        // 기존의 'if (EnemiesAlive > 0) return;' 로직을 삭제하거나 주석 처리합니다.
+        if (isGameOver) return;
+
+        if (EnemiesAlive > maxEnemiesAllowed)
+        {
+            isGameOver = true;
+            Debug.Log("한계치 돌파! 게임 오버!");
+            return;
+        }
+
+        UpdateUI();
 
         if (waveIndex == waves.Length)
         {
-            // 모든 웨이브가 스폰된 후, 남아있는 적이 없을 때 승리 처리 (선택 사항)
             if (EnemiesAlive <= 0) 
             {
                 gameManager.WinLevel();
@@ -40,40 +60,69 @@ public class WaveSpawner : MonoBehaviour {
 
         countdown -= Time.deltaTime;
         countdown = Mathf.Clamp(countdown, 0f, Mathf.Infinity);
-
-        // [방어 코드] 텍스트가 할당되어 있을 때만 실행하여 Null 에러 방지
-        if (waveCountdownText != null)
-        {
-            waveCountdownText.text = string.Format("{0:00.00}", countdown);
-        }
     }
 
     IEnumerator SpawnWave ()
-	{
-		PlayerStats.Rounds++;
-
-		// [수정] 현재 waveIndex가 배열 크기 안에 있는지 확인
-		if (waveIndex >= waves.Length)
-		{
-			Debug.Log("모든 웨이브가 끝났습니다.");
-			yield break; 
-		}
-
-		Wave wave = waves[waveIndex];
-		// EnemiesAlive = wave.count; // 이 부분은 몬스터가 누적되길 원한다면 += wave.count로 수정하거나 관리 방식을 바꿔야 합니다.
-
-		for (int i = 0; i < wave.count; i++)
-		{
-			SpawnEnemy(wave.enemy);
-			yield return new WaitForSeconds(1f / wave.rate);
-		}
-
-		waveIndex++; // 여기서 증가된 index가 다음 호출 때 배열 길이를 넘지 않아야 함
-	}
-
-    void SpawnEnemy (GameObject enemy)
     {
-        Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
-        EnemiesAlive++; // 적이 생성될 때마다 카운트 증가
+        PlayerStats.Rounds++;
+
+        if (waveIndex >= waves.Length)
+        {
+            yield break; 
+        }
+
+        Wave wave = waves[waveIndex];
+
+        for (int i = 0; i < wave.count; i++)
+        {
+            SpawnEnemy(wave.enemy, wave.enemyHP);
+            yield return new WaitForSeconds(1f / wave.rate);
+        }
+
+        waveIndex++; 
+    }
+
+    void SpawnEnemy (GameObject enemy, float hp)
+    {
+        GameObject e = Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+        
+        Enemy enemyScript = e.GetComponent<Enemy>();
+        if (enemyScript != null)
+        {
+            enemyScript.SetHealth(hp);
+        }
+
+        EnemiesAlive++; 
+    }
+
+    void UpdateUI()
+    {
+        // ★ 1. 카운트다운을 소수점 없이 정수로 표시합니다. (Mathf.CeilToInt 사용)
+        if (waveCountdownText != null)
+            waveCountdownText.text = Mathf.CeilToInt(countdown).ToString();
+
+        if (currentWaveText != null)
+            currentWaveText.text = waveIndex + " / " + waves.Length;
+
+        if (enemyCountText != null)
+        {
+            enemyCountText.text = EnemiesAlive + " / " + maxEnemiesAllowed;
+            
+            if (EnemiesAlive >= maxEnemiesAllowed * 0.8f)
+                enemyCountText.color = Color.red;
+            else
+                enemyCountText.color = Color.white;
+        }
+
+        if (enemyCountGauge != null)
+        {
+            enemyCountGauge.fillAmount = (float)EnemiesAlive / maxEnemiesAllowed;
+
+            // ★ 2. Color.orange 에러 수정 (RGB 값을 직접 입력하여 주황색 생성)
+            if (EnemiesAlive >= maxEnemiesAllowed * 0.8f)
+                enemyCountGauge.color = Color.red;
+            else
+                enemyCountGauge.color = new Color(1f, 0.5f, 0f); // 1, 0.5, 0 = 주황색
+        }
     }
 }

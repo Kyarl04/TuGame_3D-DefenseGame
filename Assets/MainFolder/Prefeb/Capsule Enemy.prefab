@@ -322,6 +322,7 @@ MonoBehaviour:
   startHealth: 100
   worth: 50
   deathEffect: {fileID: 1948529037051913089, guid: c43d41b50be6dfe4fb88cb15fd5f50b9, type: 3}
+  damageTextPrefab: {fileID: 198858897149895651, guid: 86db045ea4af01e42b02667866960de2, type: 3}
   healthBar: {fileID: 2478568733922909497}
 --- !u!114 &1945150497511496583
 MonoBehaviour:
