@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
@@ -21,12 +22,18 @@ public class Enemy : MonoBehaviour {
     [Header("Unity Stuff")]
     public Image healthBar;
 
+    [Header("Dissolve Effect")]
+    public float dissolveDuration = 1.5f; // 디졸브가 진행될 시간 (초)
+    private Renderer[] renderers;
+
     private bool isDead = false;
 
     void Start ()
     {
         speed = startSpeed;
         health = startHealth; // SetHealth가 호출되지 않았을 때를 대비한 기본값
+
+        renderers = GetComponentsInChildren<Renderer>();
     }
 
     // ★ [추가된 부분] WaveSpawner에서 몬스터를 스폰할 때 호출하여 체력을 정해줍니다.
@@ -77,11 +84,47 @@ public class Enemy : MonoBehaviour {
         isDead = true;
 
         PlayerStats.Money += worth;
+        WaveSpawner.EnemiesAlive--; // 죽은 즉시 카운트에서 뺍니다.
 
-        GameObject effect = (GameObject)Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 5f);
+        // ★ [추가] 죽었으므로 타워가 더 이상 때리지 못하게 콜라이더를 끕니다.
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
 
-        WaveSpawner.EnemiesAlive--;
+        GetComponent<EnemyMovement>().enabled = false;
+
+        // ★ [수정] 즉시 파괴하지 않고 디졸브 코루틴을 시작합니다.
+        StartCoroutine(DissolveRoutine());
+    }
+
+    IEnumerator DissolveRoutine()
+    {
+        float timer = 0f;
+
+        while (timer < dissolveDuration)
+        {
+            timer += Time.deltaTime;
+            
+            // 0에서 1까지 서서히 증가하는 값을 계산합니다.
+            float dissolveValue = Mathf.Lerp(0f, 1f, timer / dissolveDuration);
+
+            // 몬스터의 모든 재질(Material)에 접근해 파라미터 값을 바꿔줍니다.
+            foreach (Renderer rend in renderers)
+            {
+                if (rend != null && rend.material.HasProperty("_DissolveFloat"))
+                {
+                    rend.material.SetFloat("_DissolveFloat", dissolveValue);
+                }
+            }
+
+            yield return null; // 다음 프레임까지 대기
+        }
+
+        // 디졸브가 완전히 끝나서 1이 되면, 기존의 사망 이펙트를 띄우고 삭제합니다.
+        if (deathEffect != null)
+        {
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 5f);
+        }
 
         Destroy(gameObject);
     }

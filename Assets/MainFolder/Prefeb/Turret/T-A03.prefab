@@ -332,7 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 20
   bulletPrefab: {fileID: 6686401370490609367, guid: 191c5dbead252a946b1044555781f04e, type: 3}
-  baseFireRate: 0.75
+  baseFireRate: 1.5
   baseBulletDamage: 80
   currentFireRate: 0
   currentBulletDamage: 0

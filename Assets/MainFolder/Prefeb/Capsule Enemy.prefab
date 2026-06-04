@@ -324,6 +324,7 @@ MonoBehaviour:
   deathEffect: {fileID: 1948529037051913089, guid: c43d41b50be6dfe4fb88cb15fd5f50b9, type: 3}
   damageTextPrefab: {fileID: 198858897149895651, guid: 86db045ea4af01e42b02667866960de2, type: 3}
   healthBar: {fileID: 2478568733922909497}
+  dissolveDuration: 1
 --- !u!114 &1945150497511496583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,7 +365,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3f8168ecc3d418d48a16b6c41f75f2ef, type: 2}
+  - {fileID: 2100000, guid: 30cc5b7ee59322f4e953e65b9f78864f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
