@@ -6,6 +6,9 @@ public class Enemy : MonoBehaviour {
 
     public float startSpeed = 10f;
 
+    [Header("Animation")]
+    private Animator anim; 
+
     [HideInInspector]
     public float speed;
 
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour {
         health = startHealth; // SetHealth가 호출되지 않았을 때를 대비한 기본값
 
         renderers = GetComponentsInChildren<Renderer>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     // ★ [추가된 부분] WaveSpawner에서 몬스터를 스폰할 때 호출하여 체력을 정해줍니다.
@@ -91,8 +95,13 @@ public class Enemy : MonoBehaviour {
         if (col != null) col.enabled = false;
 
         GetComponent<EnemyMovement>().enabled = false;
+        if (anim != null)
+        {
+            anim.SetTrigger("Die");
+        }
 
-        // ★ [수정] 즉시 파괴하지 않고 디졸브 코루틴을 시작합니다.
+        speed = 0f;
+
         StartCoroutine(DissolveRoutine());
     }
 
@@ -110,9 +119,9 @@ public class Enemy : MonoBehaviour {
             // 몬스터의 모든 재질(Material)에 접근해 파라미터 값을 바꿔줍니다.
             foreach (Renderer rend in renderers)
             {
-                if (rend != null && rend.material.HasProperty("_DissolveFloat"))
+                if (rend != null && rend.material.HasProperty("_DIntensity2"))
                 {
-                    rend.material.SetFloat("_DissolveFloat", dissolveValue);
+                    rend.material.SetFloat("_DIntensity2", dissolveValue);
                 }
             }
 
