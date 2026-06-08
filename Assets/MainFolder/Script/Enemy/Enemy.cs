@@ -102,6 +102,15 @@ public class Enemy : MonoBehaviour {
 
         speed = 0f;
 
+        if (deathEffect != null)
+        {
+            // 몬스터의 현재 위치에 파티클 소환
+            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+            
+            // 파티클이 계속 쌓여서 렉이 걸리지 않도록 5초(또는 파티클 길이에 맞게) 뒤에 파괴합니다.
+            Destroy(effect, 5f); 
+        }
+
         StartCoroutine(DissolveRoutine());
     }
 
@@ -126,13 +135,6 @@ public class Enemy : MonoBehaviour {
             }
 
             yield return null; // 다음 프레임까지 대기
-        }
-
-        // 디졸브가 완전히 끝나서 1이 되면, 기존의 사망 이펙트를 띄우고 삭제합니다.
-        if (deathEffect != null)
-        {
-            GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Destroy(effect, 5f);
         }
 
         Destroy(gameObject);
