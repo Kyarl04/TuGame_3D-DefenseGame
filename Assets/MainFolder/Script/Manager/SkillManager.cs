@@ -132,6 +132,7 @@ public class SkillManager : MonoBehaviour {
         {
             GameObject effect = Instantiate(impactPrefab, targetPosition, Quaternion.identity);
             Destroy(effect, 3f);
+            SoundManager.Instance.PlaySkillImpact();
         }
 
         if (currentTargetingSkill == 1)

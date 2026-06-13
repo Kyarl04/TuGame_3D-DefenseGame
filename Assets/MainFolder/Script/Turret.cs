@@ -12,11 +12,9 @@ public class Turret : MonoBehaviour {
     [Header("Use Bullets (default)")]
     public GameObject bulletPrefab;
     
-    // 업그레이드 적용 전 기본 스탯
     public float baseFireRate = 1f;
     public int baseBulletDamage = 50; 
     
-    // 업그레이드가 적용된 최종 스탯
     [HideInInspector] public float currentFireRate;
     [HideInInspector] public int currentBulletDamage;
     
@@ -39,20 +37,24 @@ public class Turret : MonoBehaviour {
     public Transform[] firePoints; 
     private int firePointIndex = 0;
 
-    void Start () {
+    private Quaternion idleRotation; // 대기 상태 각도 저장용
+
+    void Start () 
+    {
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
-        ApplyUpgrades(); // 시작할 때 업그레이드 수치 적용
+        ApplyUpgrades(); 
+
+        if (partToRotate != null)
+        {
+            idleRotation = partToRotate.rotation;
+        }
     }
     
-    // ★ [추가] UpgradeManager에서 보너스를 가져와서 내 스탯을 강화하는 함수
     public void ApplyUpgrades()
     {
         if (UpgradeManager.instance != null)
         {
-            // 최종 공격력 = 기본 공격력 + (업그레이드 레벨 * 레벨당 증가량)
             currentBulletDamage = baseBulletDamage + (UpgradeManager.instance.atkLevel * UpgradeManager.instance.bonusDamagePerLevel);
-            
-            // 최종 공속 = 기본 공속 + (업그레이드 레벨 * 레벨당 증가량)
             currentFireRate = baseFireRate + (UpgradeManager.instance.spdLevel * UpgradeManager.instance.bonusSpeedPerLevel);
         }
         else
@@ -66,30 +68,52 @@ public class Turret : MonoBehaviour {
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
+        
         GameObject nearestEnemy = null;
+        Enemy nearestEnemyComponent = null;
 
         foreach (GameObject enemy in enemies)
         {
+            // ★ [핵심] 자식 오브젝트가 잡혔을 경우를 대비해 부모의 Enemy 컴포넌트를 가져옵니다.
+            Enemy e = enemy.GetComponentInParent<Enemy>();
+            
+            // ★ 스크립트가 아예 없거나, 이미 디졸브 중(죽음)이라면 무조건 무시합니다!
+            if (e == null || e.isDead) 
+                continue;
+
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToEnemy < shortestDistance)
             {
                 shortestDistance = distanceToEnemy;
                 nearestEnemy = enemy;
+                nearestEnemyComponent = e;
             }
         }
 
         if (nearestEnemy != null && shortestDistance <= range)
         {
             target = nearestEnemy.transform;
-            targetEnemy = nearestEnemy.GetComponent<Enemy>();
+            targetEnemy = nearestEnemyComponent;
         } 
         else
         {
             target = null;
+            targetEnemy = null;
         }
     }
 
     void Update () {
+        // ★ 조준 중인 타겟이 오류가 생겼거나 죽었다면 즉시 타겟팅 해제
+        if (target != null)
+        {
+            if (targetEnemy == null || targetEnemy.isDead)
+            {
+                target = null; 
+                targetEnemy = null;
+            }
+        }
+
+        // 조준할 타겟이 없는 경우 (대기 상태)
         if (target == null)
         {
             if (useLaser)
@@ -101,7 +125,14 @@ public class Turret : MonoBehaviour {
                     impactLight.enabled = false;
                 }
             }
-            return;
+
+            // 고개를 부드럽게 정면으로 되돌립니다.
+            if (partToRotate != null)
+            {
+                partToRotate.rotation = Quaternion.Lerp(partToRotate.rotation, idleRotation, Time.deltaTime * turnSpeed * 0.5f);
+            }
+
+            return; 
         }
 
         LockOnTarget();
@@ -115,7 +146,6 @@ public class Turret : MonoBehaviour {
             if (fireCountdown <= 0f)
             {
                 Shoot();
-                // [수정] currentFireRate 사용
                 fireCountdown = 1f / currentFireRate;
             }
 
@@ -163,12 +193,11 @@ public class Turret : MonoBehaviour {
 
         GameObject bulletGO = Instantiate(bulletPrefab, fPoint.position, fPoint.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
+        SoundManager.Instance.PlayTowerShoot();
 
         if (bullet != null)
         {
             bullet.Seek(target);
-            
-            // [수정] currentBulletDamage 사용
             bullet.damage = currentBulletDamage; 
         }
 

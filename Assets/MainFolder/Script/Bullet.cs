@@ -42,6 +42,7 @@ public class Bullet : MonoBehaviour {
 	void HitTarget ()
 	{
 		GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
+		SoundManager.Instance.PlayBulletHit();
 		Destroy(effectIns, 5f);
 
 		if (explosionRadius > 0f)
@@ -56,30 +57,31 @@ public class Bullet : MonoBehaviour {
 	}
 
 	void Explode ()
-	{
-		Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-		foreach (Collider collider in colliders)
-		{
-			if (collider.tag == "Enemy")
-			{
-				Damage(collider.transform);
-			}
-		}
-	}
+    {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        foreach (Collider collider in colliders)
+        {
+            if (collider.tag == "Enemy")
+            {
+                Damage(collider.transform);
+            }
+        }
+    }
 
-	void Damage (Transform enemy)
-	{
-		Enemy e = enemy.GetComponent<Enemy>();
+    void Damage (Transform enemy)
+    {
+        // ★ [핵심 수정] 타워때와 마찬가지로 부모 오브젝트의 Enemy 컴포넌트를 가져옵니다!
+        Enemy e = enemy.GetComponentInParent<Enemy>();
 
-		if (e != null)
-		{
-			e.TakeDamage(damage);
-		}
-	}
+        if (e != null)
+        {
+            e.TakeDamage(damage);
+        }
+    }
 
-	void OnDrawGizmosSelected ()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, explosionRadius);
-	}
+    void OnDrawGizmosSelected ()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
 }

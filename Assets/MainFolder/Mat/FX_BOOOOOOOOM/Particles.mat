@@ -181,6 +181,7 @@ Material:
     - _VertexDisplcement: 0
     - _Vertex_Distort_Value: 0
     - _WorkflowMode: 1
+    - _ZTestMode: 8
     - _ZWirteMode: 0
     - _ZWrite: 1
     - _src: 5

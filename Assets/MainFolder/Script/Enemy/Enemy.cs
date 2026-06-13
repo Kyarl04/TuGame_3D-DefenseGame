@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour {
     public float dissolveDuration = 1.5f; // 디졸브가 진행될 시간 (초)
     private Renderer[] renderers;
 
-    private bool isDead = false;
+    public bool isDead = false;
 
     void Start ()
     {
@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour {
         if (health <= 0 && !isDead)
         {
             Die();
+            
         }
     }
 
@@ -87,14 +88,16 @@ public class Enemy : MonoBehaviour {
     {
         isDead = true;
 
-        PlayerStats.Money += worth;
-        WaveSpawner.EnemiesAlive--; // 죽은 즉시 카운트에서 뺍니다.
+        gameObject.tag = "Untagged"; 
 
-        // ★ [추가] 죽었으므로 타워가 더 이상 때리지 못하게 콜라이더를 끕니다.
+        PlayerStats.Money += worth;
+        WaveSpawner.EnemyDied(); // (아까 수정한 몬스터 카운트 감소)
+
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
 
         GetComponent<EnemyMovement>().enabled = false;
+        
         if (anim != null)
         {
             anim.SetTrigger("Die");
@@ -121,19 +124,25 @@ public class Enemy : MonoBehaviour {
         while (timer < dissolveDuration)
         {
             timer += Time.deltaTime;
-            
-            // 0에서 1까지 서서히 증가하는 값을 계산합니다.
             float dissolveValue = Mathf.Lerp(0f, 1f, timer / dissolveDuration);
 
-            // 몬스터의 모든 재질(Material)에 접근해 파라미터 값을 바꿔줍니다.
             foreach (Renderer rend in renderers)
             {
-                if (rend != null && rend.material.HasProperty("_DIntensity2"))
+                if (rend != null)
                 {
-                    rend.material.SetFloat("_DIntensity2", dissolveValue);
+                    // ★ [수정됨] rend.material(단수) 대신 rend.materials(복수) 배열을 가져옵니다!
+                    Material[] mats = rend.materials; 
+
+                    // 렌더러 안에 있는 '모든' 마테리얼을 하나씩 검사해서 디졸브를 먹입니다.
+                    foreach (Material mat in mats)
+                    {
+                        if (mat.HasProperty("_DIntensity2"))
+                        {
+                            mat.SetFloat("_DIntensity2", dissolveValue);
+                        }
+                    }
                 }
             }
-
             yield return null; // 다음 프레임까지 대기
         }
 

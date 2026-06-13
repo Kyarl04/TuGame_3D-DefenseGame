@@ -68,7 +68,10 @@ public class BuildManager : MonoBehaviour {
             GameObject effect = Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
             Destroy(effect, 5f);
         }
-
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayTowerBuild();
+        }
         UpdateMergeEffects(); 
     }
 
@@ -102,6 +105,11 @@ public class BuildManager : MonoBehaviour {
 
         targetNode.UpgradeToNextTier();
         UpdateMergeEffects();
+
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayTowerUpgrade();
+        }
     }
 
     public void UpdateMergeEffects()

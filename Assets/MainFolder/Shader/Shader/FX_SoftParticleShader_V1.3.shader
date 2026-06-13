@@ -12,7 +12,7 @@ Shader "FX_ParticleShader_V1.3"
 		[Toggle(_SOFTPARTICLE_ON_ON)] _SoftParticle_ON("SoftParticle_ON", Float) = 0
 		[Header(Setting)][Enum(AlphaBlend,5,Additive,1)]_src("src", Float) = 5
 		[Enum(UnityEngine.Rendering.CullMode)]_CullMode("CullMode", Float) = 0
-		[ASEEnd]_ZTestMode("ZTestMode", Float) = 0
+		[ASEEnd][Enum(UnityEngine.Rendering.CompareFunction)]_ZTestMode("ZTestMode", Float) = 4
 
 
 		//_TessPhongStrength( "Tess Phong Strength", Range( 0, 1 ) ) = 0.5
@@ -2093,7 +2093,7 @@ Node;AmplifyShaderEditor.SimpleMultiplyOpNode;32;478.9954,473.8701;Inherit;False
 Node;AmplifyShaderEditor.TextureCoordinatesNode;11;-1006.487,58.59227;Inherit;False;0;10;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;10;-744.4066,27.39224;Inherit;True;Property;_MainTexture;MainTexture;0;1;[Header];Create;True;1;Main Texture;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;42;-421.0772,72.54829;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.RangedFloatNode;43;-957.8055,1402.58;Inherit;False;Property;_ZTestMode;ZTestMode;6;0;Create;True;0;1;Option1;0;1;;True;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;43;-958.6055,1402.58;Inherit;False;Property;_ZTestMode;ZTestMode;6;1;[Enum];Create;True;0;1;Option1;0;1;UnityEngine.Rendering.CompareFunction;True;0;False;4;0;0;0;0;1;FLOAT;0
 WireConnection;18;0;17;0
 WireConnection;21;0;19;0
 WireConnection;21;1;20;4
@@ -2124,4 +2124,4 @@ WireConnection;10;1;11;0
 WireConnection;42;0;10;0
 WireConnection;42;1;10;4
 ASEEND*/
-//CHKSM=41B0FD382F87858ADC19760FE33E2FBD78F29232
+//CHKSM=AE3FF999D57DF7A653A02D12E379278A758BB292
