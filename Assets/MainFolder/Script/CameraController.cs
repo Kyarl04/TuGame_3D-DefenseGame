@@ -76,7 +76,7 @@ public class CameraController : MonoBehaviour {
         pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
         // ================= 4. 이동 영역 제한 (Clamp) =================
-        pos.x = Mathf.Clamp(pos.x, limitX.x, limitX.y);
+        pos.x = Mathf.Clamp(pos.x, limitX.x, limitX.y); 
         pos.z = Mathf.Clamp(pos.z, limitZ.x, limitZ.y);
 
         transform.position = pos;
