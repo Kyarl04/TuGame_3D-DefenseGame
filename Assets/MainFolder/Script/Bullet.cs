@@ -39,23 +39,34 @@ public class Bullet : MonoBehaviour {
 
 	}
 
-	void HitTarget ()
-	{
-		GameObject effectIns = (GameObject)Instantiate(impactEffect, transform.position, transform.rotation);
-		SoundManager.Instance.PlayBulletHit();
-		Destroy(effectIns, 5f);
+	void HitTarget()
+    {
+        // 1. 이펙트 생성 (이펙트 프리팹이 안 비어있을 때만!)
+        if (impactEffect != null)
+        {
+            GameObject effectIns = Instantiate(impactEffect, transform.position, transform.rotation);
+            Destroy(effectIns, 5f); // 이펙트 찌꺼기 정리
+        }
 
-		if (explosionRadius > 0f)
-		{
-			Explode();
-		} else
-		{
-			Damage(target);
-		}
+        // 2. 사운드 재생 (★ 이 부분에 안전장치가 없어서 무한루프가 돌았을 겁니다!)
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayBulletHit();
+        }
 
-		Destroy(gameObject);
-	}
+        // 3. 데미지 주기 로직 (폭발 범위가 있다면 OverlapSphere 사용, 없다면 그냥 타겟 타격)
+        if (explosionRadius > 0f)
+        {
+            Explode();
+        }
+        else
+        {
+            Damage(target);
+        }
 
+        // 4. 무슨 일이 있어도 총알은 무조건 파괴되도록 맨 마지막에 배치!
+        Destroy(gameObject);
+    }
 	void Explode ()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);

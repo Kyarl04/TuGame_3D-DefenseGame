@@ -1,22 +1,43 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOver : MonoBehaviour {
+public class GameOver : MonoBehaviour
+{
+    public string menuSceneName = "MainMenu"; // 메뉴 씬 이름
 
-    [Header("Scene Routing")]
-    public string menuSceneName = "MainMenu";
-    public SceneFader sceneFader;
-
-    // 게임 오버 후 다시 도전
-    public void Retry ()
+    public void Retry()
     {
-        // 현재 씬(메인 게임)을 다시 로드합니다.
-        sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayButtonClick();
+        // 1. 씬을 다시 로드하기 전에 혹시 멈춰있을지 모를 시간을 다시 흐르게 합니다!
+        Time.timeScale = 1f; 
+
+        // 2. 디졸브 매니저가 있는지 확인하는 안전장치!
+        if (SceneTransitionManager.Instance != null)
+        {
+            // 매니저가 있으면 멋지게 디졸브 효과로 현재 씬 다시 시작
+            SceneTransitionManager.Instance.TransitionToScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            // 매니저가 없으면(게임 씬에서 바로 시작한 경우) 쌩얼로(?) 그냥 씬 이동!
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
-    // 메인 메뉴로 돌아가기
-    public void Menu ()
+    public void Menu()
     {
-        sceneFader.FadeTo(menuSceneName);
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayButtonClick();
+        // 1. 시간을 다시 흐르게 합니다.
+        Time.timeScale = 1f; 
+
+        // 2. 안전장치 적용
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.TransitionToScene(menuSceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene(menuSceneName);
+        }
     }
 }

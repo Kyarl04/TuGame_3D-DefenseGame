@@ -1,27 +1,52 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
     [Header("UI Panels")]
-    public GameObject optionsPanel; // 옵션 창 패널
+    public GameObject optionsPanel; 
+    
+    [Header("Scene Settings")]
+    public string menuSceneName = "MainMenu"; 
 
-    // 옵션 열기 버튼에 연결할 함수
     public void OpenOptions()
     {
+        // ★ [추가] 코드로 직접 버튼 소리 재생!
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayButtonClick();
+
         if (optionsPanel != null)
         {
             optionsPanel.SetActive(true);
-            Time.timeScale = 0f; // 옵션 창을 열면 게임 일시정지
+            Time.timeScale = 0f; 
         }
     }
 
-    // 옵션 닫기 버튼에 연결할 함수
     public void CloseOptions()
     {
+        // ★ [추가] 코드로 직접 버튼 소리 재생!
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayButtonClick();
+
         if (optionsPanel != null)
         {
             optionsPanel.SetActive(false);
-            Time.timeScale = 1f; // 게임 다시 진행
+            Time.timeScale = 1f; 
+        }
+    }
+
+    public void QuitToMenu()
+    {
+        // ★ [추가] 코드로 직접 버튼 소리 재생!
+        if (SoundManager.Instance != null) SoundManager.Instance.PlayButtonClick();
+
+        Time.timeScale = 1f; 
+
+        if (SceneTransitionManager.Instance != null)
+        {
+            SceneTransitionManager.Instance.TransitionToScene(menuSceneName);
+        }
+        else
+        {
+            SceneManager.LoadScene(menuSceneName);
         }
     }
 }

@@ -191,16 +191,24 @@ public class Turret : MonoBehaviour {
 
         Transform fPoint = firePoints[firePointIndex];
 
+        // 총알 소환
         GameObject bulletGO = Instantiate(bulletPrefab, fPoint.position, fPoint.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
-        SoundManager.Instance.PlayTowerShoot();
+        
+        // ★ [완벽한 사운드 재생] 매니저가 있을 때만, 새로운 SoundManager를 통해 재생!
+        if (SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlayTowerShoot();
+        }
 
+        // 총알에 데미지와 타겟 전달
         if (bullet != null)
         {
             bullet.Seek(target);
             bullet.damage = currentBulletDamage; 
         }
 
+        // 발사구(FirePoint) 교체 로직
         firePointIndex++;
         if (firePointIndex >= firePoints.Length)
         {

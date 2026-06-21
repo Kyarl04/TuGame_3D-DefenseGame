@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 003c17cb1d8012f468791fd3813f9794, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuSceneName: MainMenu
+  menuSceneName: SpeedLevel
 --- !u!114 &66335489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1866,102 +1866,53 @@ MonoBehaviour:
   - waveName: Wave_1
     enemyGroups:
     - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
-      count: 30
-      rate: 1
+      count: 40
+      rate: 1.3
   - waveName: Wave_2
     enemyGroups:
     - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
       count: 45
-      rate: 1.5
-  - waveName: Wave_3
-    enemyGroups:
-    - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
+      rate: 1.2
+    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
       count: 30
       rate: 1
+  - waveName: Wave_3
+    enemyGroups:
     - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
+      count: 60
+      rate: 2
+    - enemyPrefab: {fileID: 1088696906806681695, guid: ee6121fb652402147b504f3293e4e3b4, type: 3}
       count: 20
       rate: 0.7
   - waveName: Wave_4
     enemyGroups:
-    - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
+    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
       count: 45
       rate: 1.5
-    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 37
-      rate: 1.6
+    - enemyPrefab: {fileID: 4193149192591957214, guid: 17d4101b5c1397b4dbc5c6910d024b74, type: 3}
+      count: 50
+      rate: 1.7
   - waveName: Wave_5
     enemyGroups:
-    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 45
-      rate: 1.5
-    - enemyPrefab: {fileID: 4193149192591957214, guid: 17d4101b5c1397b4dbc5c6910d024b74, type: 3}
-      count: 30
-      rate: 1
-  - waveName: Wave_6
-    enemyGroups:
     - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
       count: 60
       rate: 2
     - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 45
-      rate: 1.5
-    - enemyPrefab: {fileID: 4193149192591957214, guid: 17d4101b5c1397b4dbc5c6910d024b74, type: 3}
-      count: 15
-      rate: 0.5
-  - waveName: Wave_7
-    enemyGroups:
-    - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
-      count: 90
-      rate: 3
-    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 45
-      rate: 1.5
-    - enemyPrefab: {fileID: 1088696906806681695, guid: ee6121fb652402147b504f3293e4e3b4, type: 3}
-      count: 15
-      rate: 0.5
-  - waveName: Wave_8
-    enemyGroups:
-    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 60
-      rate: 2
+      count: 50
+      rate: 1.7
     - enemyPrefab: {fileID: 4193149192591957214, guid: 17d4101b5c1397b4dbc5c6910d024b74, type: 3}
       count: 45
-      rate: 1.5
+      rate: 1.4
     - enemyPrefab: {fileID: 1088696906806681695, guid: ee6121fb652402147b504f3293e4e3b4, type: 3}
       count: 30
-      rate: 1
-  - waveName: Wave_9
-    enemyGroups:
-    - enemyPrefab: {fileID: 3443422386071831568, guid: b1ff11469af14324d83aaefe58302f47, type: 3}
-      count: 90
-      rate: 2.5
-    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 60
-      rate: 2
-    - enemyPrefab: {fileID: 4193149192591957214, guid: 17d4101b5c1397b4dbc5c6910d024b74, type: 3}
-      count: 60
-      rate: 2
-    - enemyPrefab: {fileID: 1088696906806681695, guid: ee6121fb652402147b504f3293e4e3b4, type: 3}
-      count: 30
-      rate: 1
-  - waveName: Wave_10
-    enemyGroups:
-    - enemyPrefab: {fileID: 3058419207032212177, guid: 65971c4a00c61b842ba855f6dafc72d2, type: 3}
-      count: 45
-      rate: 1.5
-    - enemyPrefab: {fileID: 4193149192591957214, guid: 17d4101b5c1397b4dbc5c6910d024b74, type: 3}
-      count: 30
-      rate: 1
-    - enemyPrefab: {fileID: 1088696906806681695, guid: ee6121fb652402147b504f3293e4e3b4, type: 3}
-      count: 60
-      rate: 2
+      rate: 1.2
   spawnPoint: {fileID: 1578243295}
   timeBetweenWaves: 30
   waveCountdownText: {fileID: 556459647}
   enemyCountText: {fileID: 683422145}
   nextWaveButton: {fileID: 35269345}
   currentWaveText: {fileID: 914921299}
-  healthIncreasePerWave: 0.3
+  healthIncreasePerWave: 0.4
 --- !u!1 &189362518
 GameObject:
   m_ObjectHideFlags: 0
@@ -21190,7 +21141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 949a210b66499f74f8986cd944c39050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 1000
+  startMoney: 700
   startLives: 20
 --- !u!114 &757062741
 MonoBehaviour:

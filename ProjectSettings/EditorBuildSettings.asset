@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MainFolder/Scenes/MainLevel.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/MainFolder/Scenes/SpeedLevel.unity
+    guid: 3943162901fd2d749a61cecbfc41e749
   m_configObjects: {}
